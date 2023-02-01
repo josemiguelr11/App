@@ -1,0 +1,27 @@
+from sqlalchemy.orm import Session
+from .. models.user import User
+from ..models import matter_models, formule_models, history_models, identifier_models, user_models
+
+def create_user(db: Session, user: str, password: str):
+    user_db = user_models.User(user=user, password=password)
+    db.add(user_db)
+    db.commit()
+    db.refresh(user_db)
+    return user_db
+
+def get_user(db: Session, user_id: int):
+    return db.query(user_models.User).filter(user_models.User.id == user_id).first()
+
+def update_user(db: Session, user_id: int, user: str, password: str):
+    user_db = db.query(user_models.User).filter(user_models.User.id == user_id).first()
+    user_db.user = user
+    user_db.password = password
+    db.commit()
+    return user_db
+
+def delete_user(db: Session, user_id: int):
+    user_db = db.query(user_models.User).filter(user_models.User.id == user_id).first()
+    db.delete(user_db)
+    db.commit()
+
+
