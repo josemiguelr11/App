@@ -1,10 +1,9 @@
 from sqlalchemy.orm import Session
-from .. models.formule import Formule
 from ..models import matter_models, formule_models, history_models, identifier_models, user_models
-
+from .. models.formule import Formule
 
 def create_formule(db: Session, formule:Formule):
-    formule = formule_models.Formule(id_primary=id_primary, id_secundary=id_secundary, required=required)
+    formule = Formule(id_primary=formule.id_primary, id_secundary=formule.id_secundary, required=formule.required)
     db.add(formule)
     db.commit()
     db.refresh(formule)

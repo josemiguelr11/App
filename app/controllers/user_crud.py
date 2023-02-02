@@ -2,8 +2,8 @@ from sqlalchemy.orm import Session
 from .. models.user import User
 from ..models import matter_models, formule_models, history_models, identifier_models, user_models
 
-def create_user(db: Session, user: str, password: str):
-    user_db = user_models.User(user=user, password=password)
+def create_user(db: Session, user:User):
+    user_db = User(user=user.user, password=user.password)
     db.add(user_db)
     db.commit()
     db.refresh(user_db)

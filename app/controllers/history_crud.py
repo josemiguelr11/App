@@ -3,8 +3,8 @@ from sqlalchemy import Column, Integer, String, Numeric, ForeignKey, date
 from ..models import matter_models, formule_models, history_models, identifier_models, user_models
 from .. models.history import History
 
-def create_history(db: Session, date: date, id_matter: int, id_identifier: int, value: int):
-    history_db = history_models.History(date=date, id_matter=id_matter, id_identifier=id_identifier, value=value)
+def create_history(db: Session, history:History):
+    history_db = History(date=history.date, id_matter=history.id_matter, id_identifier=history.id_identifier, value=history.value)
     db.add(history_db)
     db.commit()
     db.refresh(history_db)
