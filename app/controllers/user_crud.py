@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from .. models.user import User
-from ..models import matter_models, formule_models, history_models, identifier_models, user_models
+from ..models import user_models
 
 def create_user(db: Session, user:User):
     user_db = User(user=user.user, password=user.password)
@@ -9,7 +9,10 @@ def create_user(db: Session, user:User):
     db.refresh(user_db)
     return user_db
 
-def get_user(db: Session, user_id: int):
+def get_user(db: Session):
+    return db.query(user_models.User).all()
+
+def get_user_by_id(db: Session, user_id: int):
     return db.query(user_models.User).filter(user_models.User.id == user_id).first()
 
 def update_user(db: Session, user_id: int, user: str, password: str):
