@@ -1,7 +1,15 @@
 from pydantic import BaseModel
 from typing import Union
 
-class User(BaseModel):
-    id: int
+class UserBase(BaseModel):
     user: str
-    password:str
+
+
+class UserCreate(UserBase):
+    password: str
+
+
+class User(UserCreate):
+    id: int
+    class Config:
+        orm_mode = True

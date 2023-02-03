@@ -2,22 +2,22 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from app.test.database import get_db
 from app.controllers.user_crud import create_user,  get_user
-from app.models.user import User
+from app.models.user import UserCreate, User
 from sqlalchemy.orm import Session
 
 app_user = APIRouter()
 
 @app_user.post("/users/", response_model=User)
-def create_user_end_point(user:User, db: Session = Depends(get_db)):
+def create_new_user(user:UserCreate, db: Session = Depends(get_db)):
     db_user = create_user(db, user)
     if db_user:
-        raise HTTPException(status_code=400, detail="Email already registered")
-    return db_user
+        return db_user
+    raise HTTPException(status_code=400, detail="Email already registered")
 
 
 @app_user.get("/users/", response_model=List[User])
 def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    users = get_user(db)
+    users = get_user(db, skip=skip, limit=limit)
     return users
 
 
