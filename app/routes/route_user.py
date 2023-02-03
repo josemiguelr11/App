@@ -8,8 +8,8 @@ from sqlalchemy.orm import Session
 app_user = APIRouter()
 
 @app_user.post("/users/", response_model=User)
-def create_user(user:User, db: Session = Depends(get_db)):
-    db_user = create_user(db, email=user.email)
+def create_user_end_point(user:User, db: Session = Depends(get_db)):
+    db_user = create_user(db, user)
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
     return db_user
