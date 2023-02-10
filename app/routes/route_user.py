@@ -1,8 +1,8 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException
-from app.test.database import get_db
-from app.controllers.user_crud import create_user,  get_user
-from app.models.user import UserCreate, User
+from config.database import get_db
+from controllers.user_crud import create_user,  get_user
+from models.user import UserCreate, User
 from sqlalchemy.orm import Session
 
 app_user = APIRouter()

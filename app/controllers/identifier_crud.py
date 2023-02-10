@@ -1,6 +1,5 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import Column, Integer, String, Numeric, ForeignKey, Date
-from ..models import matter_models, formule_models, history_models, identifier_models, user_models
+from ..models import identifier_models
 from .. models.identifier import Identifier
 
 def create_identifier(db: Session, identifier: Identifier):

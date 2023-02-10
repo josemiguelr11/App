@@ -5,4 +5,4 @@ class History(BaseModel):
     date: str
     id_matter: int
     id_identifier: int
-    value: int
+    value: float
