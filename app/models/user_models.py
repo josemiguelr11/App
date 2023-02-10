@@ -1,7 +1,6 @@
 from sqlalchemy import Boolean, Column, Integer, Sequence, String
 from sqlalchemy.orm import relationship
-from .matter_models import Matter
-from ..test.database import Base
+from config.database import Base
 
 
 class User(Base):

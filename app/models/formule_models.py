@@ -1,6 +1,6 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Date, Numeric
 from sqlalchemy.orm import relationship
-from ..test.database import Base
+from config.database import Base
 
 class Formule(Base):
     __tablename__ = "formule"
