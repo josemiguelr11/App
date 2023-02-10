@@ -1,8 +1,9 @@
 from pydantic import BaseModel
 from typing import Union
-from matter import Matter
+from .matter import Matter
 
-class Formule(BaseModel):
+class FormulaBase(BaseModel):
     id_primary: Matter
-    id_secundary: Matter
+    id_secondary: Matter
     required: float
+    

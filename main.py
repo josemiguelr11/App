@@ -4,7 +4,7 @@ from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
 import uvicorn
 from app.routes.route_user import app_user as route_user
-
+from app.routes.route_formule import app_formule as route_formule
 # from  import crud, models, schemas
 # from .database import SessionLocal, engine
 from app.test.database import Base, engine
@@ -13,6 +13,7 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 app.include_router(route_user)
+app.include_router(route_formule)
 # Dependency
 
 
