@@ -1,8 +1,8 @@
-from ..models.formule import FormulaBase
-from ..controllers.formule_crud import create_formule, update_formule, get_formule, delete_formule
+from models.formule import FormulaBase
+from controllers.formule_crud import create_formule, update_formule, get_formule, delete_formule
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException
-from ..test.database import get_db
+from config.database import get_db
 from sqlalchemy.orm import Session
 
 
