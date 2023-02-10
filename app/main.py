@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 import uvicorn
 from routes.route_user import app_user as route_user
 from routes.route_matter import app_matter as route_matter
-from app.routes.route_formule import app_formule as route_formule
+
 # from  import crud, models, schemas
 # from .database import SessionLocal, engine
 from config.database import Base, engine
@@ -14,7 +14,6 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 app.include_router(route_user)
-app.include_router(route_formule)
 app.include_router(route_matter)
 # Dependency
 

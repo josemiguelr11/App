@@ -1,11 +1,8 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from config.database import get_db
-from controllers.user_crud import create_user,  get_user
+from controllers.user_crud import create_user,  get_user, get_user_by_id, update_user, delete_user
 from models.user import UserCreate, User
-from ..test.database import get_db
-from ..controllers.user_crud import create_user,  get_user, get_user_by_id, delete_user, update_user
-from ..models.user import UserCreate, User
 from sqlalchemy.orm import Session
 
 app_user = APIRouter()
