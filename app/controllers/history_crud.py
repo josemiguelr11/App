@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import Column, Integer, String, Numeric, ForeignKey, date
-from ..models import matter_models, formule_models, history_models, identifier_models, user_models
+from sqlalchemy import date
+from ..models import history_models
 from .. models.history import History
 
 def create_history(db: Session, history:History):
