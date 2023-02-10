@@ -24,8 +24,7 @@ def update_user(db: Session, user_id: int, user: str, password: str):
     db.commit()
     return user_db
 
-def delete_user(db: Session, user_id: int):
-    user_db = db.query(user_models.User).filter(user_models.User.id == user_id).first()
+def delete_user(db: Session, user_db: user_models.User):
     db.delete(user_db)
     db.commit()
 
