@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from .. models.formule import FormulaBase
-from ..models.formule_models import Formule
+from models.formule import FormulaBase
+from models.formule_models import Formule
 
 
 def create_formule(db: Session, formule:FormulaBase):
