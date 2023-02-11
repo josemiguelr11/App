@@ -14,23 +14,24 @@ def create_new_matter(matter:MatterCreate, db: Session = Depends(get_db)):
         return db_matter
     raise HTTPException(status_code=400, detail="Email already registered")
 
-
 @app_matter.get("/matter/", response_model=List[Matter])
-def read_matters(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    matters = get_matter(db, skip=skip, limit=limit)
+def read_matters(limit: int, skip: int = 0, db: Session = Depends(get_db)):
+    matters = get_matter(db=db, limit=limit, skip=skip)
     return matters
+    
+@app_matter.delete("/matter/{matter_id}")
+def delete_matter(matter_id: int, db: Session = Depends(get_db)):
+    matter = get_matter(db, matter_id)
+    if matter:
+        delete_matter(db, matter_id)
+        return {"message": "Matter deleted successfully"}
+    raise HTTPException(status_code=404, detail="Matter not found")
 
+@app_matter.put("/matter/{matter_id}", response_model=Matter)
+def update_matter(matter_id: int, matter: MatterCreate, db: Session = Depends(get_db)):
+    db_matter = get_matter(db, matter_id)
+    if db_matter:
+        update_matter(db, matter_id, matter)
+        return {"message": "Matter updated successfully"}
+    raise HTTPException(status_code=404, detail="Matter not found")
 
-# @app.get("/matters/{matter_id}", response_model=schemas.matter)
-# def read_matter(matter_id: int, db: Session = Depends(get_db)):
-#     db_matter = crud.get_matter(db, matter_id=matter_id)
-#     if db_matter is None:
-#         raise HTTPException(status_code=404, detail="matter not found")
-#     return db_matter
-
-
-# @app.post("/matters/{matter_id}/items/", response_model=schemas.Item)
-# def create_item_for_matter(
-#     matter_id: int, item: schemas.ItemCreate, db: Session = Depends(get_db)
-# ):
-#     return crud.create_matter_item(db=db, item=item, matter_id=matter_id)

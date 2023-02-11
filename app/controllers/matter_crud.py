@@ -10,7 +10,7 @@ def create_matter(db: Session, matter:MatterCreate):
     return matter_db
 
 def get_matter(db: Session, skip:int, limit:int):
-    return db.query(Matter).offset(skip).limit(limit).all()
+    return db.query(Matter).limit(limit).offset(skip).all()
 
 def update_matter(db: Session, matter_id: int, name: str):
     matter_db = db.query(Matter).filter(Matter.id == matter_id).first()
