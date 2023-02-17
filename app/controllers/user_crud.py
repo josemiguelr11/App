@@ -18,7 +18,7 @@ def get_user_by_id(db: Session, user_id: int):
     return db.query(user_models.User).filter(user_models.User.id == user_id).first()
 
 def update_user(db: Session, user_id: int, user: str, password: str):
-    user_db = db.query(user_models.User).filter(user_models.User.id == user_id).first()
+    user_db = db.query(User).filter(User.id == user_id).first()
     user_db.user = user
     user_db.password = password
     db.commit()
