@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 app_user = APIRouter()
 
 
-@app_user.post("/users/", response_model=User)
+@app_user.post("/users/", response_model=User, tags=['Usuario'])
 def create_new_user(user:UserCreate, db: Session = Depends(get_db)):
     db_user = create_user(db, user)
     if db_user:
@@ -16,21 +16,21 @@ def create_new_user(user:UserCreate, db: Session = Depends(get_db)):
     raise HTTPException(status_code=400, detail="Email already registered")
 
 
-@app_user.get("/users/", response_model=List[User])
+@app_user.get("/users/", response_model=List[User], tags=['Usuario'])
 def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     users = get_user(db, skip=skip, limit=limit)
     return users
 
 
-@app_user.put("/users/{user_id}", response_model=User)
-def update_users(user_id: int, user: UserCreate, password: str, db: Session = Depends(get_db)):
+@app_user.put("/users/{user_id}", response_model=User, tags=['Usuario'])
+def update_users(user_id: int, password: str, db: Session = Depends(get_db)):
     db_user = get_user_by_id(db, user_id=user_id)
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
-    update_user(db, db_user, user, password)
+    update_user(db, db_user, password)
     return db_user
 
-@app_user.delete("/users/{user_id}", response_model=User)
+@app_user.delete("/users/{user_id}", response_model=User, tags=['Usuario'])
 def delete_users(user_id: int, db: Session = Depends(get_db)):
     db_user = get_user_by_id(db, user_id=user_id)
     if db_user is None:

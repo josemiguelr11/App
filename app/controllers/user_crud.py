@@ -17,12 +17,10 @@ def get_user(db: Session, skip:int, limit:int):
 def get_user_by_id(db: Session, user_id: int):
     return db.query(user_models.User).filter(user_models.User.id == user_id).first()
 
-def update_user(db: Session, user_id: int, user: str, password: str):
-    user_db = db.query(User).filter(User.id == user_id).first()
-    user_db.user = user
-    user_db.password = password
+def update_user(db: Session, user_old:User, password:str):
+    user_old.password = password
     db.commit()
-    return user_db
+    return user_old
 
 def delete_user(db: Session, user_db: user_models.User):
     db.delete(user_db)
