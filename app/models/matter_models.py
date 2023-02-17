@@ -12,5 +12,5 @@ class Matter(Base):
 
     user = relationship("User", back_populates="matters")
     # histories = relationship("History", back_populates="matter", foreign_keys=[History.id_matter])
-    formules = relationship("Formule", back_populates="matter", foreign_keys=[Formule.id_primary])
-    formules_sec = relationship("Formule", back_populates="matter", foreign_keys=[Formule.id_secondary])
+    formules = relationship("Formule",  cascade="all,delete", back_populates="matter", foreign_keys=[Formule.id_primary])
+    formules_sec = relationship("Formule",  cascade="all,delete", back_populates="matter", foreign_keys=[Formule.id_secondary])
