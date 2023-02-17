@@ -12,13 +12,14 @@ def create_matter(db: Session, matter:MatterCreate):
 def get_matter(db: Session, skip:int, limit:int):
     return db.query(Matter).limit(limit).offset(skip).all()
 
-def update_matter(db: Session, matter_id: int, name: str):
-    matter_db = db.query(Matter).filter(Matter.id == matter_id).first()
+def get_matter_by_id(db: Session, matter_id: int):
+    return db.query(Matter).filter(Matter.id == matter_id).first()
+
+def update_matter(db: Session, matter_db:Matter, name: str):
     matter_db.name = name
     db.commit()
     return matter_db
 
-def delete_matter(db: Session, matter_id: int):
-    matter_db = db.query(Matter).filter(Matter.id == matter_id).first()
+def delete_matter(db: Session, matter_db:Matter):
     db.delete(matter_db)
     db.commit()
