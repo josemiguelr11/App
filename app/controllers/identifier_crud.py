@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from ..models import identifier_models
-from .. models.identifier import Identifier
+from models import identifier_models
+from models.identifier import Identifier
 
 def create_identifier(db: Session, identifier: Identifier):
     identifier_db = Identifier(id_identifier=identifier.id_identifier, name=identifier.name)
