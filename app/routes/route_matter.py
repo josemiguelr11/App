@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from config.database import get_db
-from controllers.matter_crud import create_matter, get_matter, get_matter_by_id, update_matter, delete_matter
+from controllers.matter_crud import create_matter, get_matter, get_matter_by_id, update_matter, delete_matter, get_matter_by_user_id, get_matter_by_user
 from models.matter import Matter, MatterCreate
 from sqlalchemy.orm import Session
 
@@ -34,4 +34,15 @@ def update_matter_by_id(matter_id: int, matter_name: str, db: Session = Depends(
         update_matter(db, db_matter, matter_name)
         return {"message": "Matter updated successfully"}
     raise HTTPException(status_code=404, detail="Matter not found")
+
+@app_matter.get("/matter_user/{user_id}", tags=['Materiales'])
+def read_matters_user_id(user_id: int, db: Session = Depends(get_db)):
+    db_matter = get_matter_by_user_id(db, user_id)
+    return db_matter
+
+@app_matter.get("/matter_by_user/{user_id}", tags=['Materiales'])
+def read_matters_user(user_id: int, db: Session = Depends(get_db)):
+    db_matter = get_matter_by_user(db, user_id)
+    return db_matter
+
 
