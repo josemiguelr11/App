@@ -4,6 +4,8 @@ import uvicorn
 from routes.route_user import app_user as route_user
 from routes.route_matter import app_matter as route_matter
 from routes.route_formule import app_formule as route_formule
+from routes.route_identifier import app_identifier as route_identifier
+from routes.route_history import app_history as route_history
 from fastapi.middleware.cors import CORSMiddleware
 # from  import crud, models, schemas
 # from .database import SessionLocal, engine
@@ -15,7 +17,8 @@ app = FastAPI()
 app.include_router(route_user)
 app.include_router(route_matter)
 app.include_router(route_formule)
-
+app.include_router(route_identifier)
+app.include_router(route_history)
 # Dependency
 
 origins = [
